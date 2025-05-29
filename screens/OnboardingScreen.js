@@ -21,7 +21,7 @@ export default function AuthScreen({ navigation }) {
   const handleContinue = async () => {
     if (username.trim()) {
       await AsyncStorage.setItem('user_name', username.trim());
-      navigation.replace('Home');
+      navigation.replace('Content');
     }
   };
 
