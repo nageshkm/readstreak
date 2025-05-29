@@ -9,7 +9,9 @@ import {
   Alert,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Dimensions } from 'react-native';
 
+const screenHeight = Dimensions.get('window').height;
 const ARTICLES = [
   {
     title: "The Power of Daily Reading",
@@ -186,7 +188,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     textAlign: 'center',
     marginBottom: 10,
-    marginTop: 10,
+    marginTop: 40,
   },
   centerSection: {
     alignItems: 'center',
