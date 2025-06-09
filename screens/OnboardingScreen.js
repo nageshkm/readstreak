@@ -22,14 +22,18 @@ export default function OnboardingScreen() {
   const [name, setName] = useState('');
   const navigation = useNavigation();
 
+  const redirect = AuthSession.makeRedirectUri({ useProxy: true });
+  console.log('Generated redirect URI:', redirect);
+
   const [request, response, promptAsync] = Google.useAuthRequest({
     clientId:
       '609187760603-nvfu1qhsnt2avd2pqobjjjrcnodkhp4g.apps.googleusercontent.com',
-    redirectUri: AuthSession.makeRedirectUri({ useProxy: true }),
+    redirectUri: redirect,
     scopes: ['profile', 'email'],
   });
 
   useEffect(() => {
+    console.log('Google auth response:', response);
     if (response?.type === 'success') {
       const { authentication } = response;
       if (authentication?.accessToken) {
@@ -71,7 +75,10 @@ export default function OnboardingScreen() {
         <TouchableOpacity
           style={[styles.button, { marginTop: 10 }]}
           disabled={!request}
-          onPress={() => promptAsync()}
+          onPress={() => {
+            console.log('Starting Google OAuth with:', request?.redirectUri);
+            promptAsync();
+          }}
         >
           <Text style={styles.buttonText}>Sign in with Google</Text>
         </TouchableOpacity>
