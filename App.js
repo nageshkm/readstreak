@@ -13,6 +13,9 @@ export default function App() {
 
   useEffect(() => {
     const checkSignIn = async () => {
+      // 🔽 Add this line below to clear the token (for testing only)
+      await AsyncStorage.removeItem('user_token');
+
       const token = await AsyncStorage.getItem('user_token');
       setIsSignedIn(!!token);
     };
